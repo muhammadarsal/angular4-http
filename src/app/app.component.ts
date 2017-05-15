@@ -8,9 +8,7 @@ import { ServerService } from './server.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  constructor(private serverService: ServerService) {}
-
+  appName = this.serverService.getAppName();
   servers = [
     {
       name: 'Testserver',
@@ -23,6 +21,9 @@ export class AppComponent {
       id: this.generateId()
     }
   ];
+  constructor(private serverService: ServerService) {}
+
+
   onAddServer(name: string) {
     this.servers.push({
       name: name,
@@ -42,10 +43,7 @@ export class AppComponent {
   onGet() {
     this.serverService.getServers()
       .subscribe(
-        (response: Response) => {
-          const data = response.json();
-          console.log(data);
-        },
+        (servers: any[]) => this.servers = servers,
         (error) => console.log(error)
       );
   }
