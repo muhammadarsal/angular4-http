@@ -21,7 +21,6 @@ export class ServerService {
 
 	}
 
-
 	getServers() {
 		return this.http.get('https://ng-http-4e08c.firebaseio.com/data.json')
 			.map(
